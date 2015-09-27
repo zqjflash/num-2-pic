@@ -4,7 +4,7 @@
  * @desc 没有任何依赖, 只兼容webkit内核, 主要用于H5页面. 组件本身没有css, 如果需要修改默认样式 可以添加css样式修饰.
  * @param {object} opts 实例化参数
  * @param {string} opts.container 容器选择器 selector
- * @param {number} opts.width=1 数字的总宽度个数, 即要显示几位数
+ * @param {number} opts.digit=1 数字的总宽度个数, 即要显示几位数
  * @example
  HTML:
  <div id="num-roll"></div>
@@ -12,12 +12,13 @@
  js:
  var r1=new DigitRoll({
         container:'#happy-new-year',
-        width:9
+        digit:9
     });
  */
 function DigitRoll(opts) {
     this.container=document.querySelector(opts.container); //容器
-    this.width=opts.width || 1;
+    this.digit=opts.digit || 1;
+    this.isPicture = opts.isPicture || false;
     if (!this.container) {
         throw Error('no container');
     }
@@ -28,7 +29,7 @@ function DigitRoll(opts) {
         this.container.style.height='20px';
         this.rollHeight=20;
     }
-    this.setWidth();
+    this.setDigit();
 }
 /**  @lends DigitRoll */
 DigitRoll.prototype={
@@ -44,13 +45,13 @@ DigitRoll.prototype={
         },5000)
      */
     roll:function (n) {
-        var self=this;
+        var self = this;
         this.number=parseInt(n)+'';
-        if (this.number.length<this.width) {
-            this.number=new Array(this.width - this.number.length + 1).join('0') + this.number;
-        }else if (this.number.length>this.width) {
-            this.width=this.number.length;
-            this.setWidth();
+        if (this.number.length<this.digit) {
+            this.number=new Array(this.digit - this.number.length + 1).join('0') + this.number;
+        }else if (this.number.length>this.digit) {
+            this.digit=this.number.length;
+            this.setDigit();
         }
         Array.prototype.forEach.call(this.container.querySelectorAll('.num'), function (item,i) {
             var currentNum=parseInt(item.querySelector('div:last-child').innerHTML);//当前数字
@@ -62,15 +63,15 @@ DigitRoll.prototype={
             }else if(currentNum<goalNum) { // 比如数字从1到3
                 gapNum=goalNum-currentNum;
                 for (var j=currentNum; j<goalNum+1; j++) {
-                    gapStr+='<div>'+j+'</div>'
+                    gapStr += self._getNumDiv(j);
                 }
             }else {// 比如 数字从6到5  因为所有情况都是从下往上滚动 所以如果是6到5的话 要滚动9个数字
                 gapNum=10-currentNum+goalNum;
                 for (var j=currentNum; j<10; j++) {
-                    gapStr+='<div>'+j+'</div>'
+                    gapStr += self._getNumDiv(j);
                 }
                 for (var j=0; j<goalNum+1; j++) {
-                    gapStr+='<div>'+j+'</div>'
+                    gapStr += self._getNumDiv(j);
                 }
             }
             item.style.cssText += '-webkit-transition-duration:0s;-webkit-transform:translateY(0)';//重置位置
@@ -85,14 +86,28 @@ DigitRoll.prototype={
      * @desc 一般用不到这个方法
      * @param {number} n 宽度 即数字位数
      * @example
-     r1.setWidth(10);
+     r1.setDigit(10);
      */
-    setWidth:function (n) {
-        n=n||this.width;
+    setDigit:function (n) {
+        n=n||this.digit;
         var str='';
         for (var i=0; i<n; i++) {
-            str+='<div class="num" style="float:left;height:100%;line-height:'+this.rollHeight+'px"><div>0</div></div>';
+            str+='<div class="num" style="float:left;height:100%;line-height:'+this.rollHeight+'px">' + this._getNumDiv(0) + '</div>';
         }
         this.container.innerHTML=str;
+    },
+    /**
+     * 设置数字div展现模式
+     * @isPicture {boolean} true=>用图片展现 false=>用数字展现
+     * 内部私有方法
+     */
+    _getNumDiv: function(index) {
+        var isPicture = this.isPicture || false;
+        numberArr = [ "num0", "num1", "num2", "num3", "num4", "num5", "num6", "num7", "num8", "num9" ];
+        if (!!isPicture) {
+            return '<div class="isPicture ' + numberArr[index] + '">' + index + '</div>';
+        } else {
+            return '<div>' + index + '</div>';
+        }
     }
 }

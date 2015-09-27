@@ -1,7 +1,46 @@
 body{padding: 0;margin: 0;font-family: '微软雅黑';background: #f1f1f1;}
 h1 {text-align: center;font-size: 40px;font-weight: normal;}
-/*示例皮肤样式 [可选 全部删除也能跑]*/
-.my-skin{float: left;padding: 10px 20px;margin-top: 30px;color: #f00;clear:both;}
-.myroll {float: left;height: 40px;font-size: 38px;background: #fee;}
+/*示例皮肤样式 [以下样式全部删除也可以用]*/
+.my-skin{float: left;padding: 10px 20px;margin-top: 30px;color: #ff0;clear:both;}
+.myroll {float: left;height: 40px;font-size: 38px;background: #a30000;}
 .myroll .num{margin: 0 3px;}
+.myroll .num div {
+    width: 20px;
+}
+.myroll .num div.isPicture {
+    width: 13px;
+    text-indent: -500px;
+    background: url('http://res.imtt.qq.com/cloud_based_adp/sq_ad/images/game_number.png') no-repeat;
+    background-size: auto 50%;
+}
+.myroll div.isPicture.num0 {
+    background-position: 0px center;
+}
+.myroll div.isPicture.num1 {
+    background-position: -14px center;
+}
+.myroll div.isPicture.num2 {
+    background-position: -28px center;
+}
+.myroll div.isPicture.num3 {
+    background-position: -43px center;
+}
+.myroll div.isPicture.num4 {
+    background-position: -58px center;
+}
+.myroll div.isPicture.num5 {
+    background-position: -73px center;
+}
+.myroll div.isPicture.num6 {
+    background-position: -88px center;
+}
+.myroll div.isPicture.num7 {
+    background-position: -103px center;
+}
+.myroll div.isPicture.num8 {
+    background-position: -118px center;
+}
+.myroll div.isPicture.num9 {
+    background-position: -133px center;
+}
 .my-skin span{float: left;font-size: 38px;line-height: 38px;color: #333;}
