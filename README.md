@@ -14,6 +14,7 @@
       digit:4, // 数字图片显示位数
       isPicture: true // 选择图片或常规文字显示滚动数字
   });
+  r1.roll(100);
   ```
 
   * step4：详情参考num2pic.html测试页面
