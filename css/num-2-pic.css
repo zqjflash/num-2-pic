@@ -1,0 +1,7 @@
+body{padding: 0;margin: 0;font-family: '微软雅黑';background: #f1f1f1;}
+h1 {text-align: center;font-size: 40px;font-weight: normal;}
+/*示例皮肤样式 [可选 全部删除也能跑]*/
+.my-skin{float: left;padding: 10px 20px;margin-top: 30px;color: #f00;clear:both;}
+.myroll {float: left;height: 40px;font-size: 38px;background: #fee;}
+.myroll .num{margin: 0 3px;}
+.my-skin span{float: left;font-size: 38px;line-height: 38px;color: #333;}
